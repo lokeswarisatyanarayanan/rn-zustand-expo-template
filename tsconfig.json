@@ -19,7 +19,8 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    ".eslintrc.js",
+    "eslint.config.cjs",
+    "prettier.config.js",
     "babel.config.js",
     "app.config.ts",
     "src/config-plugins/withAndroidSigning.js",

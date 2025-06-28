@@ -1,9 +1,10 @@
-import { Slot } from "expo-router";
-import React, { useEffect, useState } from "react";
-import { View, ActivityIndicator } from "react-native";
+import React, { useEffect, useState } from 'react';
+import { View, ActivityIndicator } from 'react-native';
 
-import { useAppStore } from "@src/state";
-import { hydrateStoreFromSecureStorage } from "@src/state/hydrate";
+import { Slot } from 'expo-router';
+
+import { useAppStore } from '@src/state';
+import { hydrateStoreFromSecureStorage } from '@src/state/hydrate';
 
 export default function RootLayout() {
   const [ready, setReady] = useState(false);
@@ -21,7 +22,7 @@ export default function RootLayout() {
 
   if (!ready) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <ActivityIndicator size="large" />
       </View>
     );

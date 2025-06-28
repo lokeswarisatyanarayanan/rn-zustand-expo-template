@@ -1,5 +1,5 @@
-import type { ReactNode } from "react";
-import type { ViewStyle, TextStyle } from "react-native";
+import type { ReactNode } from 'react';
+import type { ViewStyle, TextStyle } from 'react-native';
 
 export interface AppBarProps {
   title?: string;

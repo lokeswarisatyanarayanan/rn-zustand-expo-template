@@ -1,21 +1,16 @@
-import React, { useEffect } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  ScrollView,
-  ActivityIndicator,
-  SafeAreaView,
-} from "react-native";
-import { useLocalSearchParams } from "expo-router";
-import { usePost } from "../hook";
+import React, { useEffect } from 'react';
+import { Text, View, StyleSheet, ScrollView, ActivityIndicator, SafeAreaView } from 'react-native';
+
+import { useLocalSearchParams } from 'expo-router';
+
+import { usePost } from '../hook';
 
 const PostDetailScreen = (): React.JSX.Element => {
   const { id } = useLocalSearchParams();
   const { selectedPost, fetchPostById, isLoading } = usePost();
 
   useEffect(() => {
-    if (typeof id === "string") {
+    if (typeof id === 'string') {
       fetchPostById(id);
     }
   }, [id]);
@@ -41,9 +36,7 @@ const PostDetailScreen = (): React.JSX.Element => {
           <View style={styles.headerContainer}>
             <Text style={styles.postId}>Post #{selectedPost.id}</Text>
             {selectedPost.userId && (
-              <Text style={styles.authorText}>
-                By User {selectedPost.userId}
-              </Text>
+              <Text style={styles.authorText}>By User {selectedPost.userId}</Text>
             )}
           </View>
 
@@ -80,7 +73,7 @@ const PostDetailScreen = (): React.JSX.Element => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f8f9fa",
+    backgroundColor: '#f8f9fa',
   },
   scrollView: {
     flex: 1,
@@ -90,10 +83,10 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   postContainer: {
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
     borderRadius: 16,
     padding: 24,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 4,
@@ -103,36 +96,36 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
   headerContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: 16,
   },
   postId: {
     fontSize: 14,
-    fontWeight: "600",
-    color: "#007AFF",
-    backgroundColor: "#E3F2FD",
+    fontWeight: '600',
+    color: '#007AFF',
+    backgroundColor: '#E3F2FD',
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 20,
   },
   authorText: {
     fontSize: 14,
-    color: "#666666",
-    fontStyle: "italic",
+    color: '#666666',
+    fontStyle: 'italic',
   },
   postTitle: {
     fontSize: 28,
-    fontWeight: "700",
-    color: "#1a1a1a",
+    fontWeight: '700',
+    color: '#1a1a1a',
     lineHeight: 36,
     marginBottom: 20,
-    textAlign: "left",
+    textAlign: 'left',
   },
   divider: {
     height: 1,
-    backgroundColor: "#e0e0e0",
+    backgroundColor: '#e0e0e0',
     marginBottom: 24,
   },
   bodyContainer: {
@@ -140,42 +133,42 @@ const styles = StyleSheet.create({
   },
   postBody: {
     fontSize: 16,
-    color: "#333333",
+    color: '#333333',
     lineHeight: 26,
-    textAlign: "justify",
+    textAlign: 'justify',
   },
   footerContainer: {
-    flexDirection: "row",
-    justifyContent: "space-around",
+    flexDirection: 'row',
+    justifyContent: 'space-around',
     paddingTop: 20,
     borderTopWidth: 1,
-    borderTopColor: "#f0f0f0",
+    borderTopColor: '#f0f0f0',
   },
   footerItem: {
-    alignItems: "center",
+    alignItems: 'center',
   },
   footerLabel: {
     fontSize: 12,
-    color: "#999999",
-    textTransform: "uppercase",
+    color: '#999999',
+    textTransform: 'uppercase',
     letterSpacing: 1,
     marginBottom: 4,
   },
   footerValue: {
     fontSize: 16,
-    fontWeight: "600",
-    color: "#333333",
+    fontWeight: '600',
+    color: '#333333',
   },
   loadingContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#f8f9fa",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f8f9fa',
   },
   loadingText: {
     marginTop: 16,
     fontSize: 16,
-    color: "#666666",
+    color: '#666666',
   },
 });
 

@@ -1,1 +1,1 @@
-export * from "./post.hook";
+export * from './post.hook';

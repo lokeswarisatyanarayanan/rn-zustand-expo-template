@@ -1,18 +1,18 @@
-import type { ReactNode } from "react";
-import type { ViewProps, ViewStyle } from "react-native";
+import type { ReactNode } from 'react';
+import type { ViewProps, ViewStyle } from 'react-native';
 
 export type SpacingKey =
-  | "xxsmall"
-  | "xsmall"
-  | "small"
-  | "medium"
-  | "large"
-  | "xlarge"
-  | "xxlarge"
-  | "screenPadding";
-export type BackgroundColorKey = "primary" | "secondary";
+  | 'xxsmall'
+  | 'xsmall'
+  | 'small'
+  | 'medium'
+  | 'large'
+  | 'xlarge'
+  | 'xxlarge'
+  | 'screenPadding';
+export type BackgroundColorKey = 'primary' | 'secondary';
 
-export interface BaseProps extends Omit<ViewProps, "style"> {
+export interface BaseProps extends Omit<ViewProps, 'style'> {
   children?: ReactNode;
   padding?: SpacingKey | number;
   paddingHorizontal?: SpacingKey | number;

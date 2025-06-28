@@ -1,12 +1,13 @@
-import { getItem } from "@src/library/storage";
-import type { AppState } from "./createSlices";
+import { getItem } from '@src/library/storage';
+
+import type { AppState } from './createSlices';
 
 type SetFn = (fn: (state: AppState) => void) => void;
 
 export async function hydrateAppStateSlice(set: SetFn): Promise<void> {
-  const isOnboardingCompleted = await getItem<string>("ONBOARDING_COMPLETED");
+  const isOnboardingCompleted = await getItem<string>('ONBOARDING_COMPLETED');
 
-  set((state) => {
-    state.app.isOnboardingCompleted = isOnboardingCompleted === "true";
+  set(state => {
+    state.app.isOnboardingCompleted = isOnboardingCompleted === 'true';
   });
 }

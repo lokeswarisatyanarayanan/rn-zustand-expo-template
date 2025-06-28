@@ -1,8 +1,8 @@
-import type { StateCreator } from "zustand";
-import type { Post } from "../data";
-import { fetchPostById, fetchPosts } from "../api";
-import { AppState } from "@src/state/createSlices";
-import { CreateSlice } from "@src/library/state";
+import { CreateSlice } from '@src/library/state';
+import { AppState } from '@src/state/createSlices';
+
+import { fetchPostById, fetchPosts } from '../api';
+import type { Post } from '../data';
 
 export interface PostSlice {
   posts: Post[];
@@ -14,35 +14,35 @@ export interface PostSlice {
   clearError: () => void;
 }
 
-export const createPostSlice: CreateSlice<PostSlice, AppState> = (set) => ({
+export const createPostSlice: CreateSlice<PostSlice, AppState> = set => ({
   posts: [],
   selectedPost: null,
   isLoading: false,
   error: null,
 
   clearError: () => {
-    set((state) => {
+    set(state => {
       state.post.error = null;
     });
   },
 
   fetchPosts: async () => {
-    set((state) => {
+    set(state => {
       state.post.isLoading = true;
       state.post.error = null;
     });
     try {
       const posts = await fetchPosts();
-      set((state) => {
+      set(state => {
         state.post.error = null;
         state.post.posts = posts;
       });
-    } catch (error) {
-      set((state) => {
-        state.post.error = "";
+    } catch {
+      set(state => {
+        state.post.error = '';
       });
     } finally {
-      set((state) => {
+      set(state => {
         state.post.isLoading = false;
         state.post.error = null;
       });
@@ -50,22 +50,22 @@ export const createPostSlice: CreateSlice<PostSlice, AppState> = (set) => ({
   },
 
   fetchPostById: async (id: string) => {
-    set((state) => {
+    set(state => {
       state.post.isLoading = true;
       state.post.error = null;
     });
     try {
       const post = await fetchPostById(id);
-      set((state) => {
+      set(state => {
         state.post.error = null;
         state.post.selectedPost = post;
       });
-    } catch (error) {
-      set((state) => {
-        state.post.error = "";
+    } catch {
+      set(state => {
+        state.post.error = '';
       });
     } finally {
-      set((state) => {
+      set(state => {
         state.post.isLoading = false;
       });
     }

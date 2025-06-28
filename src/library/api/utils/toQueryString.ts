@@ -1,4 +1,4 @@
-import { QueryParams } from "../request";
+import { QueryParams } from '../request';
 
 export function toQueryString(params: QueryParams): string {
   const searchParams = new URLSearchParams();

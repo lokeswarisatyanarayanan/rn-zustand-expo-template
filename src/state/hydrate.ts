@@ -1,5 +1,5 @@
-import type { AppState } from "./createSlices";
-import { hydrateAppStateSlice } from "./hydrateAppState";
+import type { AppState } from './createSlices';
+import { hydrateAppStateSlice } from './hydrateAppState';
 
 type SetFn = (fn: (state: AppState) => void) => void;
 
@@ -14,5 +14,5 @@ const sliceHydrators = [hydrateAppStateSlice];
  */
 
 export async function hydrateStoreFromSecureStorage(set: SetFn): Promise<void> {
-  await Promise.all(sliceHydrators.map((h) => h(set)));
+  await Promise.all(sliceHydrators.map(h => h(set)));
 }

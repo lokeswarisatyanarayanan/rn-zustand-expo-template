@@ -1,2 +1,2 @@
-export { Base } from "./Base";
-export type { BaseProps } from "./Base.types";
+export { Base } from './Base';
+export type { BaseProps } from './Base.types';

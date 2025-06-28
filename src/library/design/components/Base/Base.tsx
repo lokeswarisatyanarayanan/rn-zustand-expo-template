@@ -1,8 +1,9 @@
-import React from "react";
-import { View, type ViewStyle } from "react-native";
+import React from 'react';
+import { View, type ViewStyle } from 'react-native';
 
-import { useTheme } from "../../hooks";
-import { getSpacingValue, getBackgroundColor } from "../../utils";
+import { SpacingKey } from './Base.types';
+import { useTheme } from '../../hooks';
+import { getSpacingValue, getBackgroundColor } from '../../utils';
 
 type BaseProps = {
   children: React.ReactNode;
@@ -10,7 +11,7 @@ type BaseProps = {
   center?: boolean;
   row?: boolean;
   backgroundColor?: string;
-  padding?: keyof ReturnType<typeof useTheme>["spacing"];
+  padding?: SpacingKey;
 };
 
 const Base = ({
@@ -19,16 +20,16 @@ const Base = ({
   center = false,
   row = false,
   backgroundColor,
-  padding = "medium",
+  padding = 'medium',
 }: BaseProps): React.JSX.Element => {
   const theme = useTheme();
 
   const baseStyle: ViewStyle = {
     flex: 1,
-    flexDirection: row ? "row" : "column",
-    alignItems: center ? "center" : undefined,
-    justifyContent: center ? "center" : undefined,
-    padding: getSpacingValue(theme, "medium"),
+    flexDirection: row ? 'row' : 'column',
+    alignItems: center ? 'center' : undefined,
+    justifyContent: center ? 'center' : undefined,
+    padding: getSpacingValue(theme, padding as SpacingKey),
     backgroundColor: getBackgroundColor(theme, backgroundColor),
   };
 

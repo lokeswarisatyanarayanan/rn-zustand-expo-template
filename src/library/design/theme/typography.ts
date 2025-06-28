@@ -1,7 +1,7 @@
 export const typography = {
   fonts: {
-    primary: "System",
-    secondary: "System",
+    primary: 'System',
+    secondary: 'System',
   },
   sizes: {
     xxsmall: 10,
@@ -13,9 +13,9 @@ export const typography = {
     xxlarge: 32,
   },
   weights: {
-    light: "300",
-    regular: "400",
-    medium: "500",
-    bold: "700",
+    light: '300',
+    regular: '400',
+    medium: '500',
+    bold: '700',
   },
 };

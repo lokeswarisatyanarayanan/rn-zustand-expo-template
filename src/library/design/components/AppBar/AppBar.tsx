@@ -1,9 +1,11 @@
-import React from "react";
-import { View, Text, StatusBar, Platform } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { appBarStyles } from "./AppBar.styles";
-import type { AppBarProps } from "./AppBar.types";
-import { useTheme } from "../../hooks";
+import React from 'react';
+import { View, Text, StatusBar, Platform } from 'react-native';
+
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+import { appBarStyles } from './AppBar.styles';
+import type { AppBarProps } from './AppBar.types';
+import { useTheme } from '../../hooks';
 
 export const AppBar: React.FC<AppBarProps> = ({
   title,
@@ -24,9 +26,7 @@ export const AppBar: React.FC<AppBarProps> = ({
   const insets = useSafeAreaInsets();
 
   const statusBarHeightValue =
-    statusBarHeight && Platform.OS === "android"
-      ? StatusBar.currentHeight || 0
-      : 0;
+    statusBarHeight && Platform.OS === 'android' ? StatusBar.currentHeight || 0 : 0;
 
   const topPadding = safeArea ? insets.top : statusBarHeightValue;
   const bgColor = backgroundColor || theme.colors.background.primary;
@@ -37,13 +37,11 @@ export const AppBar: React.FC<AppBarProps> = ({
       backgroundColor: bgColor,
       height: height + topPadding,
       paddingTop: topPadding,
-      elevation: Platform.OS === "android" ? elevation : 0,
-      shadowOpacity: Platform.OS === "ios" ? (elevation > 0 ? 0.3 : 0) : 0,
-      shadowRadius: Platform.OS === "ios" ? elevation : 0,
+      elevation: Platform.OS === 'android' ? elevation : 0,
+      shadowOpacity: Platform.OS === 'ios' ? (elevation > 0 ? 0.3 : 0) : 0,
+      shadowRadius: Platform.OS === 'ios' ? elevation : 0,
       shadowOffset:
-        Platform.OS === "ios"
-          ? { width: 0, height: elevation / 2 }
-          : { width: 0, height: 0 },
+        Platform.OS === 'ios' ? { width: 0, height: elevation / 2 } : { width: 0, height: 0 },
     },
     style,
   ];
@@ -58,11 +56,7 @@ export const AppBar: React.FC<AppBarProps> = ({
             <View style={appBarStyles.titleContainer}>
               {title && (
                 <Text
-                  style={[
-                    appBarStyles.title,
-                    { color: theme.colors.text.primary },
-                    titleStyle,
-                  ]}
+                  style={[appBarStyles.title, { color: theme.colors.text.primary }, titleStyle]}
                   numberOfLines={1}
                 >
                   {title}

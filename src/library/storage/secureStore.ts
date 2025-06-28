@@ -1,6 +1,6 @@
-import * as SecureStore from "expo-secure-store";
+import * as SecureStore from 'expo-secure-store';
 
-const PREFIX = "APP__";
+const PREFIX = 'APP__';
 
 const withPrefix = (key: string) => `${PREFIX}${key}`;
 

@@ -1,4 +1,4 @@
-import { Stack } from "expo-router";
+import { Stack } from 'expo-router';
 
 export default function PostsLayout() {
   return (
@@ -6,28 +6,28 @@ export default function PostsLayout() {
       <Stack.Screen
         name="index"
         options={{
-          title: "Posts",
+          title: 'Posts',
           headerStyle: {
-            backgroundColor: "#007AFF",
+            backgroundColor: '#007AFF',
           },
-          headerTintColor: "#fff",
+          headerTintColor: '#fff',
           headerTitleStyle: {
-            fontWeight: "bold",
+            fontWeight: 'bold',
           },
         }}
       />
       <Stack.Screen
         name="[id]"
         options={{
-          title: "Post Details",
+          title: 'Post Details',
           headerStyle: {
-            backgroundColor: "#007AFF",
+            backgroundColor: '#007AFF',
           },
-          headerTintColor: "#fff",
+          headerTintColor: '#fff',
           headerTitleStyle: {
-            fontWeight: "bold",
+            fontWeight: 'bold',
           },
-          headerBackTitle: "Posts",
+          headerBackTitle: 'Posts',
         }}
       />
     </Stack>

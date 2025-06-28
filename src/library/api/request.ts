@@ -1,12 +1,12 @@
-import { toQueryString } from "./utils/toQueryString";
-import { isJsonResponse } from "./utils/isJsonResponse";
-import { API_BASE_URL } from "./configuration";
+import { API_BASE_URL } from './configuration';
+import { isJsonResponse } from './utils/isJsonResponse';
+import { toQueryString } from './utils/toQueryString';
 
 export type Primitive = string | number | boolean | null | undefined;
 export type QueryParams = Record<string, Primitive>;
 
 export type ApiRequestConfig = {
-  method?: "GET" | "POST" | "PUT" | "DELETE";
+  method?: 'GET' | 'POST' | 'PUT' | 'DELETE';
   headers?: Record<string, string>;
   queryParams?: QueryParams;
   bodyParams?: Record<string, unknown>;
@@ -16,14 +16,7 @@ export type ApiRequestConfig = {
 
 export async function request<T>(
   endpoint: string,
-  {
-    method = "GET",
-    headers = {},
-    queryParams,
-    bodyParams,
-    formData,
-    getToken,
-  }: ApiRequestConfig
+  { method = 'GET', headers = {}, queryParams, bodyParams, formData, getToken }: ApiRequestConfig,
 ): Promise<T> {
   let url = API_BASE_URL + endpoint;
   if (queryParams) {
@@ -35,7 +28,7 @@ export async function request<T>(
 
   const token = getToken?.();
   const allHeaders: Record<string, string> = {
-    Accept: "application/json",
+    Accept: 'application/json',
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
     ...headers,
   };
@@ -43,9 +36,9 @@ export async function request<T>(
   let body: BodyInit | undefined;
   if (formData) {
     body = formData;
-    delete allHeaders["Content-Type"];
-  } else if (method !== "GET" && bodyParams) {
-    allHeaders["Content-Type"] = "application/json";
+    delete allHeaders['Content-Type'];
+  } else if (method !== 'GET' && bodyParams) {
+    allHeaders['Content-Type'] = 'application/json';
     body = JSON.stringify(bodyParams);
   }
 

@@ -1,15 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import {
   FlatList,
   Text,
   TouchableOpacity,
   View,
   StyleSheet,
-  RefreshControl,
   ActivityIndicator,
-} from "react-native";
-import { usePost } from "../hook";
-import { useAppRouter } from "@src/navigation/useAppNavigation";
+} from 'react-native';
+
+import { useAppRouter } from '@src/navigation/useAppNavigation';
+
+import { usePost } from '../hook';
 
 const PostListScreen = (): React.JSX.Element => {
   const { posts, fetchPosts, isLoading } = usePost();
@@ -18,10 +19,6 @@ const PostListScreen = (): React.JSX.Element => {
   useEffect(() => {
     fetchPosts();
   }, []);
-
-  const handleRefresh = () => {
-    fetchPosts();
-  };
 
   const renderPost = ({ item }: { item: any }) => (
     <TouchableOpacity
@@ -40,9 +37,7 @@ const PostListScreen = (): React.JSX.Element => {
         )}
         <View style={styles.postMeta}>
           <Text style={styles.postId}>#{item.id}</Text>
-          {item.userId && (
-            <Text style={styles.postAuthor}>User {item.userId}</Text>
-          )}
+          {item.userId && <Text style={styles.postAuthor}>User {item.userId}</Text>}
         </View>
       </View>
     </TouchableOpacity>
@@ -70,7 +65,7 @@ const PostListScreen = (): React.JSX.Element => {
     <View style={styles.container}>
       <FlatList
         data={posts}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={item => item.id.toString()}
         renderItem={renderPost}
         ListEmptyComponent={renderEmpty}
         contentContainerStyle={styles.listContainer}
@@ -84,17 +79,17 @@ const PostListScreen = (): React.JSX.Element => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f8f9fa",
+    backgroundColor: '#f8f9fa',
   },
   listContainer: {
     padding: 16,
     paddingBottom: 32,
   },
   postCard: {
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
     borderRadius: 12,
     marginVertical: 4,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -108,66 +103,66 @@ const styles = StyleSheet.create({
   },
   postTitle: {
     fontSize: 18,
-    fontWeight: "600",
-    color: "#1a1a1a",
+    fontWeight: '600',
+    color: '#1a1a1a',
     lineHeight: 24,
     marginBottom: 8,
   },
   postPreview: {
     fontSize: 14,
-    color: "#666666",
+    color: '#666666',
     lineHeight: 20,
     marginBottom: 12,
   },
   postMeta: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   postId: {
     fontSize: 12,
-    color: "#007AFF",
-    fontWeight: "500",
+    color: '#007AFF',
+    fontWeight: '500',
   },
   postAuthor: {
     fontSize: 12,
-    color: "#999999",
+    color: '#999999',
   },
   separator: {
     height: 8,
   },
   loadingContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#f8f9fa",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f8f9fa',
   },
   loadingText: {
     marginTop: 16,
     fontSize: 16,
-    color: "#666666",
+    color: '#666666',
   },
   emptyContainer: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingVertical: 60,
   },
   emptyText: {
     fontSize: 18,
-    color: "#666666",
+    color: '#666666',
     marginBottom: 20,
   },
   retryButton: {
-    backgroundColor: "#007AFF",
+    backgroundColor: '#007AFF',
     paddingHorizontal: 24,
     paddingVertical: 12,
     borderRadius: 8,
   },
   retryText: {
-    color: "#ffffff",
+    color: '#ffffff',
     fontSize: 16,
-    fontWeight: "600",
+    fontWeight: '600',
   },
 });
 

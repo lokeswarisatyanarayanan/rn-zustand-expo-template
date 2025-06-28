@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "rntemplate.app"
-               BlueprintName = "rntemplate"
-               ReferencedContainer = "container:rntemplate.xcodeproj">
+               BuildableName = "expotemplatezustandrouter.app"
+               BlueprintName = "expotemplatezustandrouter"
+               ReferencedContainer = "container:expotemplatezustandrouter.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "rntemplateTests.xctest"
-               BlueprintName = "rntemplateTests"
-               ReferencedContainer = "container:rntemplate.xcodeproj">
+               BuildableName = "expotemplatezustandrouterTests.xctest"
+               BlueprintName = "expotemplatezustandrouterTests"
+               ReferencedContainer = "container:expotemplatezustandrouter.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "rntemplate.app"
-            BlueprintName = "rntemplate"
-            ReferencedContainer = "container:rntemplate.xcodeproj">
+            BuildableName = "expotemplatezustandrouter.app"
+            BlueprintName = "expotemplatezustandrouter"
+            ReferencedContainer = "container:expotemplatezustandrouter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "rntemplate.app"
-            BlueprintName = "rntemplate"
-            ReferencedContainer = "container:rntemplate.xcodeproj">
+            BuildableName = "expotemplatezustandrouter.app"
+            BlueprintName = "expotemplatezustandrouter"
+            ReferencedContainer = "container:expotemplatezustandrouter.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -1,26 +1,23 @@
-import type { Theme } from "../theme";
-import type {
-  SpacingKey,
-  BackgroundColorKey,
-} from "../components/Base/Base.types";
+import type { SpacingKey, BackgroundColorKey } from '../components/Base/Base.types';
+import type { Theme } from '../theme';
 
 export const getSpacingValue = (
   theme: Theme,
-  spacing?: SpacingKey | number
+  spacing?: SpacingKey | number,
 ): number | undefined => {
-  if (typeof spacing === "number") return spacing;
-  if (typeof spacing === "string") return theme.spacing[spacing];
+  if (typeof spacing === 'number') return spacing;
+  if (typeof spacing === 'string') return theme.spacing[spacing];
   return undefined;
 };
 
 export const getBackgroundColor = (
   theme: Theme,
-  colorKey?: BackgroundColorKey | string
+  colorKey?: BackgroundColorKey | string,
 ): string | undefined => {
   if (!colorKey) return undefined;
-  if (typeof colorKey === "string") {
+  if (typeof colorKey === 'string') {
     // Check if it's a theme color key first
-    if (colorKey === "primary" || colorKey === "secondary") {
+    if (colorKey === 'primary' || colorKey === 'secondary') {
       return theme.colors.background[colorKey as BackgroundColorKey];
     }
     // Otherwise treat as direct color value

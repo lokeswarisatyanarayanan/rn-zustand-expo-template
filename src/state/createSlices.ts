@@ -1,6 +1,7 @@
-import type { TypedStateCreator } from "@src/library/state/types";
-import { createAppStateSlice, type AppStateSlice } from "./appStateSlice";
-import { createPostSlice, PostSlice } from "@src/features/post/state/post.slice";
+import { createPostSlice, PostSlice } from '@src/features/post/state/post.slice';
+import type { TypedStateCreator } from '@src/library/state/types';
+
+import { createAppStateSlice, type AppStateSlice } from './appStateSlice';
 
 /**
  * AppState interface that includes all slices.
@@ -15,11 +16,7 @@ export interface AppState {
  * Combines all slices into the store.
  */
 
-export const createSlices: TypedStateCreator<AppState, AppState> = (
-  set,
-  get,
-  store
-) => {
+export const createSlices: TypedStateCreator<AppState, AppState> = (set, get, store) => {
   return {
     app: createAppStateSlice(set, get, store),
     post: createPostSlice(set, get, store),

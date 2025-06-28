@@ -1,41 +1,41 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 export const appBarStyles = StyleSheet.create({
   container: {
-    width: "100%",
-    justifyContent: "flex-end",
+    width: '100%',
+    justifyContent: 'flex-end',
   },
   content: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingHorizontal: 16,
     height: 56,
   },
   leftSection: {
     minWidth: 40,
-    alignItems: "flex-start",
+    alignItems: 'flex-start',
   },
   centerSection: {
     flex: 1,
-    alignItems: "center",
+    alignItems: 'center',
     paddingHorizontal: 16,
   },
   rightSection: {
     minWidth: 40,
-    alignItems: "flex-end",
+    alignItems: 'flex-end',
   },
   titleContainer: {
-    alignItems: "center",
+    alignItems: 'center',
   },
   title: {
     fontSize: 20,
-    fontWeight: "500",
-    textAlign: "center",
+    fontWeight: '500',
+    textAlign: 'center',
   },
   subtitle: {
     fontSize: 14,
-    fontWeight: "400",
-    textAlign: "center",
+    fontWeight: '400',
+    textAlign: 'center',
     marginTop: 2,
   },
 });

@@ -1,1 +1,1 @@
-export { PostListScreen as default } from "@src/features/post/screens";
+export { PostListScreen as default } from '@src/features/post/screens';

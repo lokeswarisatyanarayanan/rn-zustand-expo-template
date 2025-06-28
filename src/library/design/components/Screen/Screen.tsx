@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   View,
   ScrollView,
@@ -7,18 +7,19 @@ import {
   StatusBar,
   SafeAreaView,
   type ViewStyle,
-} from "react-native";
-import { screenStyles } from "./Screen.styles";
-import type { ScreenProps } from "./Screen.types";
-import { useTheme } from "../../hooks";
-import { getSpacingValue, getBackgroundColor } from "../../utils";
+} from 'react-native';
+
+import { screenStyles } from './Screen.styles';
+import type { ScreenProps } from './Screen.types';
+import { useTheme } from '../../hooks';
+import { getSpacingValue, getBackgroundColor } from '../../utils';
 
 export const Screen: React.FC<ScreenProps> = ({
   children,
-  padding = "screenPadding",
+  padding = 'screenPadding',
   paddingHorizontal,
   paddingVertical,
-  backgroundColor = "primary",
+  backgroundColor = 'primary',
   scroll = false,
   keyboardAvoiding = true,
   statusBar = true,
@@ -26,7 +27,6 @@ export const Screen: React.FC<ScreenProps> = ({
   safeArea = true,
   style,
   contentContainerStyle,
-  loading = false,
   scrollViewProps,
   ...rest
 }) => {
@@ -39,17 +39,13 @@ export const Screen: React.FC<ScreenProps> = ({
     backgroundColor: getBackgroundColor(theme, backgroundColor),
   };
 
-  const derivedStatusBarStyle = statusBarStyle || "dark-content";
+  const derivedStatusBarStyle = statusBarStyle || 'dark-content';
   const rootBackgroundColor = getBackgroundColor(theme, backgroundColor);
 
   const content = scroll ? (
     <ScrollView
       style={[screenStyles.scrollView, style]}
-      contentContainerStyle={[
-        screenStyle,
-        screenStyles.scrollContent,
-        contentContainerStyle,
-      ]}
+      contentContainerStyle={[screenStyle, screenStyles.scrollContent, contentContainerStyle]}
       keyboardShouldPersistTaps="handled"
       {...scrollViewProps}
     >
@@ -64,7 +60,7 @@ export const Screen: React.FC<ScreenProps> = ({
   const wrappedContent = keyboardAvoiding ? (
     <KeyboardAvoidingView
       style={screenStyles.keyboardAvoidingView}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       enabled
     >
       {content}
@@ -82,11 +78,7 @@ export const Screen: React.FC<ScreenProps> = ({
   return (
     <View style={[screenStyles.root, { backgroundColor: rootBackgroundColor }]}>
       {statusBar && (
-        <StatusBar
-          barStyle={derivedStatusBarStyle}
-          backgroundColor="transparent"
-          translucent
-        />
+        <StatusBar barStyle={derivedStatusBarStyle} backgroundColor="transparent" translucent />
       )}
       {screenContent}
     </View>
