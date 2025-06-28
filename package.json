@@ -1,6 +1,13 @@
 {
   "name": "rn-template",
   "version": "1.0.0",
+  "description": "A reusable Expo template with routing, state management with Zustand, and networking using fetch",
+  "keywords": [
+    "expo",
+    "template",
+    "react-native"
+  ],
+  "license": "MIT",
   "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
