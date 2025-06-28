@@ -19,23 +19,24 @@ A reusable **Expo** template featuring routing with **Expo Router**, state manag
 ## 🗂 Project Structure
 
 src/
-├── library/ # API, State management utilities, Design system components
-├── features/ # Zustand slices, hooks, and UI grouped by feature domain
-├── navigation/ # Expo Router pages and routing logic
-├── store/ # Combined Zustand store with multiple slices
-├── styles/ # Global themes, colors, and styling utilities
-└── utils/ # Helper functions and utilities (e.g., env loader)
+├── library/           # API, State management utilities, Design system components
+├── features/          # Zustand slices, hooks & UI components grouped by feature
+├── navigation/        # Expo Router pages and routing files
+├── store/             # Zustand store combining multiple slices
+├── styles/            # Global themes, colors, and styling files
+└── utils/             # Utilities and helper functions (e.g., env loading)
 
 scripts/
-└── reset-project.js # Script to reset colors & other project settings
+└── reset-project.js   # Script to reset colors & other project settings
 
-app/ # Expo Router entrypoint and layout files
-├── \_layout.tsx
+app/                  # Routing folder for Expo Router
+├── _layout.tsx
 └── index.tsx
 
-app.config.ts # Expo configuration with dotenv support
-tsconfig.json # TypeScript compiler configuration
-package.json # Project dependencies, scripts, and metadata
+app.config.ts         # Expo config with dotenv environment variable support
+tsconfig.json         # TypeScript configuration file
+package.json          # Project dependencies, scripts, and config
+
 
 ---
 
