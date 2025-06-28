@@ -58,7 +58,7 @@ Use this command to create a new project using this template:
 ```bash
 npx create-expo-app@latest MyNewApp \
   --template @lokeswari-satyanarayanan/rn-zustand-expo-template
-
+```
 ---
 
 ### Environment Setup
