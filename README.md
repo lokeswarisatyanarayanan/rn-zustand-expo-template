@@ -1,4 +1,4 @@
-# 🏗️ rn-template
+# 🏗️ React native + Zustand + Expo Router Template with Example!
 
 A reusable **Expo** template featuring routing with **Expo Router**, state management using **Zustand** (slice-based), and networking using native **fetch**. Comes with environment variable support via **dotenv**, a handy project reset script, and built-in code quality tooling.
 
@@ -12,24 +12,28 @@ A reusable **Expo** template featuring routing with **Expo Router**, state manag
 - 🔒 Environment variables managed via **dotenv** and `.env` files
 - 🔄 Reset project script for updating colors and configs
 - 🛠 ESLint + Prettier setup with **Husky** and **lint-staged** hooks
-- 📱 Supports **iOS**, **Android**, and **Web** platforms
+- 📱 Supports **iOS**, **Android** platforms
 
 ---
 
 ## 🗂 Project Structure
 
-    src/
-     ├── api/               # API calls and networking logic
-     ├── features/          # Zustand slices, hooks & UI components grouped by feature
-     ├── navigation/        # Expo Router pages and routing files
-     ├── store/             # Zustand store combining multiple slices
-     ├── styles/            # Global themes, colors, and styling files
-     └── utils/             # Utilities and helper functions (e.g., env loading)
-    scripts/
-     └── reset-project.js   # Script to reset colors & other project settings
-    app.config.ts           # Expo config with dotenv environment variable support
-    .tsconfig.json          # TypeScript configuration file
-    package.json            # Project dependencies, scripts, and config
+src/
+ ├── library/           # API | State | Design
+ ├── features/          # Zustand slices, hooks & UI components grouped by feature
+ ├── navigation/        # Expo Router pages and routing files
+ ├── store/             # Zustand store combining multiple slices
+ ├── styles/            # Global themes, colors, and styling files
+ └── utils/             # Utilities and helper functions (e.g., env loading)
+scripts/
+ └── reset-project.js   # Script to reset colors & other project settings
+app/                    # Routing
+ └── index.tsx        
+ |── _layout.tsx        
+app.config.ts           # Expo config with dotenv environment variable support
+.tsconfig.json          # TypeScript configuration file
+package.json            # Project dependencies, scripts, and config
+
 
 ---
 
@@ -38,20 +42,14 @@ A reusable **Expo** template featuring routing with **Expo Router**, state manag
 ### Prerequisites
 
 - Node.js v16 or higher
-- npm or yarn package manager
-- Expo CLI installed globally:
-
-  npm install -g expo-cli
+- npm package manager
 
 ---
 
 ### Installation
 
-Clone the repo and install dependencies:
-
-    git clone https://github.com/your-username/rn-template.git your-project
-    cd your-project
-    npm install
+npx create-expo-app@latest MyNewApp --template @lokeswari-satyanarayanan/rn-zustand-expo-template
+cd MyNewApp
 
 ---
 

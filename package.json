@@ -1,5 +1,5 @@
 {
-  "name": "rn-template",
+  "name": "@lokeswari-satyanarayanan/rn-zustand-expo-template",
   "version": "1.0.0",
   "description": "A reusable Expo template with routing, state management with Zustand, and networking using fetch",
   "keywords": [
@@ -64,6 +64,5 @@
     "prettier": "^3.6.0",
     "prompt-sync": "^4.2.0",
     "typescript": "~5.8.3"
-  },
-  "private": true
+  }
 }
