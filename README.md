@@ -18,6 +18,8 @@ A reusable **Expo** template featuring routing with **Expo Router**, state manag
 
 ## 🗂 Project Structure
 
+```plaintext
+
 src/
 ├── library/           # API, State management utilities, Design system components
 ├── features/          # Zustand slices, hooks & UI components grouped by feature
@@ -37,7 +39,7 @@ app.config.ts         # Expo config with dotenv environment variable support
 tsconfig.json         # TypeScript configuration file
 package.json          # Project dependencies, scripts, and config
 
-
+```
 ---
 
 ## 🚀 Getting Started
