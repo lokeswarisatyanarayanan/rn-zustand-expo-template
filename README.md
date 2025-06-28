@@ -19,21 +19,23 @@ A reusable **Expo** template featuring routing with **Expo Router**, state manag
 ## 🗂 Project Structure
 
 src/
- ├── library/           # API | State | Design
- ├── features/          # Zustand slices, hooks & UI components grouped by feature
- ├── navigation/        # Expo Router pages and routing files
- ├── store/             # Zustand store combining multiple slices
- ├── styles/            # Global themes, colors, and styling files
- └── utils/             # Utilities and helper functions (e.g., env loading)
-scripts/
- └── reset-project.js   # Script to reset colors & other project settings
-app/                    # Routing
- └── index.tsx        
- |── _layout.tsx        
-app.config.ts           # Expo config with dotenv environment variable support
-.tsconfig.json          # TypeScript configuration file
-package.json            # Project dependencies, scripts, and config
+├── library/ # API, State management utilities, Design system components
+├── features/ # Zustand slices, hooks, and UI grouped by feature domain
+├── navigation/ # Expo Router pages and routing logic
+├── store/ # Combined Zustand store with multiple slices
+├── styles/ # Global themes, colors, and styling utilities
+└── utils/ # Helper functions and utilities (e.g., env loader)
 
+scripts/
+└── reset-project.js # Script to reset colors & other project settings
+
+app/ # Expo Router entrypoint and layout files
+├── \_layout.tsx
+└── index.tsx
+
+app.config.ts # Expo configuration with dotenv support
+tsconfig.json # TypeScript compiler configuration
+package.json # Project dependencies, scripts, and metadata
 
 ---
 
@@ -59,7 +61,7 @@ Create your environment variables file:
 
     cp .env.example .env
 
-Edit `.env` with your API URLs, primary colors, keys, and other environment-specific variables.
+Edit `.env` with your API URLs, keys, and other environment-specific variables.
 
 ---
 
@@ -67,7 +69,7 @@ Edit `.env` with your API URLs, primary colors, keys, and other environment-spec
 
 Start Expo dev server:
 
-    npm start
+    npx expo start
 
 Run on iOS simulator or device:
 
@@ -76,10 +78,6 @@ Run on iOS simulator or device:
 Run on Android emulator or device:
 
     npm run android
-
-Run on web browser:
-
-    npm run web
 
 ---
 
@@ -107,15 +105,13 @@ Run on web browser:
 
 ## 🔧 Environment Variables & Multiple Environments
 
-- `.env` file contains default environment variables (API URLs, colors, keys).
+- `.env` file contains default environment variable (API URL).
 - Add `.env.staging`, `.env.production`, etc., for different environments.
-- Use packages like [`cross-env`](https://www.npmjs.com/package/cross-env) to switch environments in scripts.
 - Access environment variables with `process.env` or Expo Constants.
 
 Example `.env` content:
 
     API_URL=https://api.dev.example.com
-    PRIMARY_COLOR=#3498db
 
 ---
 
