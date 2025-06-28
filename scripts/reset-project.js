@@ -15,7 +15,7 @@ const prompt = require('prompt-sync')({ sigint: true });
     .toLowerCase();
   const moveInsteadOfDelete = answer === '' || answer === 'y';
 
-  const from = path.join(root, 'features', 'post');
+  const from = path.join(root, 'src', 'features', 'post');
   const to = path.join(root, 'src', 'example');
 
   if (await fs.pathExists(from)) {

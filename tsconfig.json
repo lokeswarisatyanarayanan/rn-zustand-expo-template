@@ -28,7 +28,7 @@
     "plopfile.mjs",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
-    "eslint.config.js"
+    "eslint.config.cjs"
   ],
   "exclude": ["node_modules", "commitlint.config.js"]
 }

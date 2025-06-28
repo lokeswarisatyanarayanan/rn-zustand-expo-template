@@ -17,7 +17,8 @@
     "prepare": "husky",
     "lint": "eslint . --ext .js,.ts,.tsx",
     "lint:fix": "eslint . --ext .js,.ts,.tsx --fix",
-    "format": "prettier --write. ."
+    "format": "prettier --write. .",
+    "reset-project": "node scripts/reset-project.js"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
