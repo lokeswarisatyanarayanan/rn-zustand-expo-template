@@ -53,8 +53,8 @@ package.json          # Project dependencies, scripts, and config
 
 ### Installation
 
-npx create-expo-app@latest MyNewApp --template @lokeswari-satyanarayanan/rn-zustand-expo-template
-cd MyNewApp
+   npx create-expo-app@latest MyNewApp --template @lokeswari-satyanarayanan/rn-zustand-expo-template
+   cd MyNewApp
 
 ---
 
