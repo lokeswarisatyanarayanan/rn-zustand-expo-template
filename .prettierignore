@@ -1,0 +1,22 @@
+# Ignore node_modules, build output, caches
+node_modules/
+dist/
+build/
+.expo/
+.vscode/
+coverage/
+
+# Ignore minified files and bundles
+*.min.js
+*.bundle.js
+
+# Ignore logs and temp files
+*.log
+*.tmp
+
+# Ignore Git folder (usually automatic)
+.git/
+
+# Ignore JSON config files if you want
+*.config.js
+commitlint.config.js

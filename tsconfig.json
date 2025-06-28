@@ -4,14 +4,9 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "@src/*": [
-        "src/*"
-      ]
+      "@src/*": ["src/*"]
     },
-    "typeRoots": [
-      "src/library/types",
-      "./node_modules/@types"
-    ],
+    "typeRoots": ["src/library/types", "./node_modules/@types"],
     "jsx": "react-native",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -32,9 +27,8 @@
     "src/config-plugins/withAllowInsecureHttp.js",
     "plopfile.mjs",
     ".expo/types/**/*.ts",
-    "expo-env.d.ts"
+    "expo-env.d.ts",
+    "eslint.config.js"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules", "commitlint.config.js"]
 }
