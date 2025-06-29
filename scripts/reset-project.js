@@ -8,9 +8,7 @@ const prompt = require('prompt-sync')({ sigint: true });
 (async () => {
   const root = process.cwd();
 
-  /** ------------------------------------------------------------------ *
-   * 1. Ask whether to KEEP the sample feature (move → example) or DELETE
-   * ------------------------------------------------------------------ */
+  /* ──────────────────────────────────────────────────────────────── 1  */
   const answer = prompt('❓  Move features/post to src/example (and keep sample)? (Y/n) ')
     .trim()
     .toLowerCase();
@@ -19,9 +17,6 @@ const prompt = require('prompt-sync')({ sigint: true });
   const fromFeature = path.join(root, 'src', 'features', 'post');
   const toFeature = path.join(root, 'src', 'example');
 
-  /* ------------------------------------------------------------------ *
-   * 2. Handle feature folder
-   * ------------------------------------------------------------------ */
   if (await fs.pathExists(fromFeature)) {
     if (keepSample) {
       await fs.ensureDir(path.dirname(toFeature));
@@ -33,15 +28,12 @@ const prompt = require('prompt-sync')({ sigint: true });
     }
   }
 
-  /** Ensure empty features/ folder lives on for future slices */
   const featuresDir = path.join(root, 'src', 'features');
   await fs.ensureDir(featuresDir);
   await fs.writeFile(path.join(featuresDir, '.gitkeep'), '');
   console.log('📁🌱  Ensured empty src/features/ with .gitkeep');
 
-  /* ------------------------------------------------------------------ *
-   * 3. Handle matching route folders under /app
-   * ------------------------------------------------------------------ */
+  /* ──────────────────────────────────────────────────────────────── 2  */
   const appDir = path.join(root, 'app');
   const postsRoute = path.join(appDir, 'posts');
   const exampleRoute = path.join(appDir, 'example');
@@ -56,9 +48,7 @@ const prompt = require('prompt-sync')({ sigint: true });
     }
   }
 
-  /* ------------------------------------------------------------------ *
-   * 4. Patch route‑entry files if we renamed routes
-   * ------------------------------------------------------------------ */
+  /* ──────────────────────────────────────────────────────────────── 3  */
   if (await fs.pathExists(appDir)) {
     const routeEntries = ['index.tsx', '_layout.tsx']
       .map(f => path.join(appDir, f))
@@ -67,10 +57,10 @@ const prompt = require('prompt-sync')({ sigint: true });
     for (const file of routeEntries) {
       let content = await fs.readFile(file, 'utf8');
       const original = content;
+
       if (keepSample) {
         content = content.replace(/(['"`])\/posts(['"`])/g, '$1/example$2');
       } else {
-        // remove any link or import that mentions /posts
         content = content.replace(/.*\/posts.*\n?/g, '');
       }
       if (content !== original) {
@@ -78,18 +68,57 @@ const prompt = require('prompt-sync')({ sigint: true });
         console.log(`🔧   Updated ${path.relative(root, file)}`);
       }
     }
+
+    /* ▼ new: replace _layout.tsx with default when sample deleted */
+    if (!keepSample) {
+      const defaultLayout = `
+import { Slot } from 'expo-router';
+import { StatusBar } from 'expo-status-bar';
+
+export default function RootLayout() {
+  return (
+    <>
+      <StatusBar style="auto" />
+      <Slot />
+    </>
+  );
+}
+`.trimStart();
+      await fs.writeFile(path.join(appDir, '_layout.tsx'), defaultLayout);
+      console.log('🎨  Replaced app/_layout.tsx with default layout');
+    }
+
+    /* ▼ new: replace index.tsx with welcome screen */
+    const pkg = await fs.readJSON(path.join(root, 'package.json'));
+    const projectName = pkg.name?.split('/').pop() || path.basename(root);
+
+    const indexScreen = `
+import { View, Text, StyleSheet } from 'react-native';
+
+export default function HomeScreen() {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>Welcome to ${projectName}!</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+  text: { fontSize: 20, fontWeight: '600' },
+});
+`.trimStart();
+    await fs.writeFile(path.join(appDir, 'index.tsx'), indexScreen);
+    console.log('👋  Replaced app/index.tsx with Welcome screen');
   }
 
-  /* ------------------------------------------------------------------ *
-   * 5. Optional: update primary color when sample was kept
-   * ------------------------------------------------------------------ */
+  /* ──────────────────────────────────────────────────────────────── 4  */
   if (keepSample) {
     const wantsColor = prompt('🌈  Change primary color? (y/N) ').trim().toLowerCase() === 'y';
 
     if (wantsColor) {
       const newColor = prompt('   → Enter hex color (e.g. #3b82f6): ').trim() || '#3b82f6';
       const colorsFile = path.join(root, 'src', 'library', 'design', 'theme', 'colors.ts');
-
       if (await fs.pathExists(colorsFile)) {
         const txt = await fs.readFile(colorsFile, 'utf8');
         const updated = txt.replace(/(primary500:\s*")[#a-fA-F0-9]+(")/, `$1${newColor}$2`);
@@ -101,16 +130,14 @@ const prompt = require('prompt-sync')({ sigint: true });
     }
   }
 
-  /* ------------------------------------------------------------------ *
-   * 6. Clean package.json + self‑destruct scripts folder
-   * ------------------------------------------------------------------ */
+  /* ──────────────────────────────────────────────────────────────── 5  */
   const pkgPath = path.join(root, 'package.json');
   if (await fs.pathExists(pkgPath)) {
-    const pkg = await fs.readJSON(pkgPath);
-    delete pkg.keywords;
-    delete pkg.license;
-    if (pkg.scripts) delete pkg.scripts['reset-project'];
-    await fs.writeJSON(pkgPath, pkg, { spaces: 2 });
+    const pkgJson = await fs.readJSON(pkgPath);
+    delete pkgJson.keywords;
+    delete pkgJson.license;
+    if (pkgJson.scripts) delete pkgJson.scripts['reset-project'];
+    await fs.writeJSON(pkgPath, pkgJson, { spaces: 2 });
     console.log('🧼  Cleaned package.json (keywords, license, reset-project removed)');
   }
 
@@ -122,5 +149,7 @@ const prompt = require('prompt-sync')({ sigint: true });
     console.error('⚠️  Failed to remove /scripts folder:', err);
   }
 
-  console.log('\n🎉  Reset complete! Run `npx expo start` and keep creating magic! ✨🚀');
+  console.log(
+    '\n🎉  Reset complete! Run `npx expo prebuild and npx run ios/android` and keep creating magic! ✨🚀',
+  );
 })();
