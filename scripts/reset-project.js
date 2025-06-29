@@ -8,94 +8,119 @@ const prompt = require('prompt-sync')({ sigint: true });
 (async () => {
   const root = process.cwd();
 
-  const answer = prompt(
-    '❓ Do you want to move features/post to src/example instead of deleting it? (Y/n) ',
-  )
+  /** ------------------------------------------------------------------ *
+   * 1. Ask whether to KEEP the sample feature (move → example) or DELETE
+   * ------------------------------------------------------------------ */
+  const answer = prompt('❓  Move features/post to src/example (and keep sample)? (Y/n) ')
     .trim()
     .toLowerCase();
-  const moveInsteadOfDelete = answer === '' || answer === 'y';
+  const keepSample = answer === '' || answer === 'y';
 
-  const from = path.join(root, 'src', 'features', 'post');
-  const to = path.join(root, 'src', 'example');
+  const fromFeature = path.join(root, 'src', 'features', 'post');
+  const toFeature = path.join(root, 'src', 'example');
 
-  if (await fs.pathExists(from)) {
-    if (moveInsteadOfDelete) {
-      await fs.ensureDir(path.dirname(to));
-      await fs.move(from, to, { overwrite: true });
-      console.log('📦✨ Moved features/post → src/example');
+  /* ------------------------------------------------------------------ *
+   * 2. Handle feature folder
+   * ------------------------------------------------------------------ */
+  if (await fs.pathExists(fromFeature)) {
+    if (keepSample) {
+      await fs.ensureDir(path.dirname(toFeature));
+      await fs.move(fromFeature, toFeature, { overwrite: true });
+      console.log('📦✨  Moved  src/features/post  →  src/example');
     } else {
-      await fs.remove(from);
-      console.log('🗑️💨 Deleted features/post directory');
+      await fs.remove(fromFeature);
+      console.log('🗑️💨  Deleted src/features/post');
     }
-  } else {
-    console.log('ℹ️ Nothing to do: no features/post folder found');
   }
 
-  const featuresDir = path.join(root, 'features');
+  /** Ensure empty features/ folder lives on for future slices */
+  const featuresDir = path.join(root, 'src', 'features');
   await fs.ensureDir(featuresDir);
   await fs.writeFile(path.join(featuresDir, '.gitkeep'), '');
-  console.log('📁🌱 Left empty features/ folder with .gitkeep');
+  console.log('📁🌱  Ensured empty src/features/ with .gitkeep');
 
-  if (moveInsteadOfDelete) {
-    const wantsColor =
-      prompt('🌈 Change primary color in src/library/design/theme/colors.ts? (y/N) ')
-        .trim()
-        .toLowerCase() === 'y';
+  /* ------------------------------------------------------------------ *
+   * 3. Handle matching route folders under /app
+   * ------------------------------------------------------------------ */
+  const appDir = path.join(root, 'app');
+  const postsRoute = path.join(appDir, 'posts');
+  const exampleRoute = path.join(appDir, 'example');
+
+  if (await fs.pathExists(postsRoute)) {
+    if (keepSample) {
+      await fs.move(postsRoute, exampleRoute, { overwrite: true });
+      console.log('🚚   Renamed  app/posts  →  app/example');
+    } else {
+      await fs.remove(postsRoute);
+      console.log('🗑️💨  Deleted app/posts route folder');
+    }
+  }
+
+  /* ------------------------------------------------------------------ *
+   * 4. Patch route‑entry files if we renamed routes
+   * ------------------------------------------------------------------ */
+  if (await fs.pathExists(appDir)) {
+    const routeEntries = ['index.tsx', '_layout.tsx']
+      .map(f => path.join(appDir, f))
+      .filter(fs.existsSync);
+
+    for (const file of routeEntries) {
+      let content = await fs.readFile(file, 'utf8');
+      const original = content;
+      if (keepSample) {
+        content = content.replace(/(['"`])\/posts(['"`])/g, '$1/example$2');
+      } else {
+        // remove any link or import that mentions /posts
+        content = content.replace(/.*\/posts.*\n?/g, '');
+      }
+      if (content !== original) {
+        await fs.writeFile(file, content);
+        console.log(`🔧   Updated ${path.relative(root, file)}`);
+      }
+    }
+  }
+
+  /* ------------------------------------------------------------------ *
+   * 5. Optional: update primary color when sample was kept
+   * ------------------------------------------------------------------ */
+  if (keepSample) {
+    const wantsColor = prompt('🌈  Change primary color? (y/N) ').trim().toLowerCase() === 'y';
 
     if (wantsColor) {
       const newColor = prompt('   → Enter hex color (e.g. #3b82f6): ').trim() || '#3b82f6';
       const colorsFile = path.join(root, 'src', 'library', 'design', 'theme', 'colors.ts');
 
       if (await fs.pathExists(colorsFile)) {
-        let content = await fs.readFile(colorsFile, 'utf8');
-
-        const primaryColorRegex = /(primary500:\s*")[#a-fA-F0-9]+(")/;
-
-        if (primaryColorRegex.test(content)) {
-          content = content.replace(primaryColorRegex, `$1${newColor}$2`);
-          await fs.writeFile(colorsFile, content);
-          console.log(`🌟 Updated primary500 color to ${newColor} in colors.ts`);
-        } else {
-          console.warn(`⚠️ Could not find primary500 color declaration in colors.ts`);
-        }
+        const txt = await fs.readFile(colorsFile, 'utf8');
+        const updated = txt.replace(/(primary500:\s*")[#a-fA-F0-9]+(")/, `$1${newColor}$2`);
+        await fs.writeFile(colorsFile, updated);
+        console.log(`🌟  Updated primary500 color to ${newColor}`);
       } else {
-        console.warn(`⚠️ colors.ts file not found at ${colorsFile}`);
-      }
-    }
-
-    const allFiles = glob.sync(path.join(root, '**/*.{ts,tsx,js,jsx}'), {
-      ignore: ['**/node_modules/**', '**/dist/**', '**/.git/**', '**/scripts/**'],
-    });
-
-    for (const file of allFiles) {
-      let content = await fs.readFile(file, 'utf8');
-      const updated = content.replace(/(['"])features\/post(['"])/g, '$1src/example$2');
-      if (updated !== content) {
-        await fs.writeFile(file, updated);
-        console.log(`🔧 Updated imports in ${path.relative(root, file)}`);
+        console.warn(`⚠️  colors.ts not found at ${colorsFile}`);
       }
     }
   }
 
+  /* ------------------------------------------------------------------ *
+   * 6. Clean package.json + self‑destruct scripts folder
+   * ------------------------------------------------------------------ */
   const pkgPath = path.join(root, 'package.json');
   if (await fs.pathExists(pkgPath)) {
     const pkg = await fs.readJSON(pkgPath);
     delete pkg.keywords;
     delete pkg.license;
-    if (pkg.scripts) {
-      delete pkg.scripts['reset-project'];
-    }
+    if (pkg.scripts) delete pkg.scripts['reset-project'];
     await fs.writeJSON(pkgPath, pkg, { spaces: 2 });
-    console.log('🧼 Cleaned package.json (removed keywords, license, reset-project script)');
+    console.log('🧼  Cleaned package.json (keywords, license, reset-project removed)');
   }
 
   const scriptsDir = path.join(root, 'scripts');
   try {
     await fs.remove(scriptsDir);
-    console.log('🔥 Removed /scripts folder (self-destruct)');
+    console.log('🔥  Removed /scripts folder (self‑destruct)');
   } catch (err) {
-    console.error('⚠️ Failed to remove /scripts folder:', err);
+    console.error('⚠️  Failed to remove /scripts folder:', err);
   }
 
-  console.log('\n🎉 Reset complete! Run `npx expo start` and keep creating magic! ✨🚀');
+  console.log('\n🎉  Reset complete! Run `npx expo start` and keep creating magic! ✨🚀');
 })();

@@ -8,7 +8,7 @@ const pluginReactNative = require('eslint-plugin-react-native');
 
 module.exports = [
   {
-    ignores: ['commitlint.config.js', 'node_modules/**', 'dist/**', 'scripts/**', '.git/**'],
+    ignores: ['commitlint.config.js', 'node_modules/**', 'dist/**', 'scripts/**', '.git/**', 'README.MD'],
     files: ['**/*.{ts,tsx,js,jsx}'],
     languageOptions: {
       parser: tsParser,
