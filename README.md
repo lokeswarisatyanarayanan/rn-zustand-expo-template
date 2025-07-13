@@ -182,7 +182,3 @@ Run manually with:
 This project is licensed under the **MIT License**.
 
 ---
-
-## 🙌 Happy coding!
-
-If you find issues or want to contribute, please open issues or pull requests. Reach out if you want help customizing or extending this template! 🚀
