@@ -4,3 +4,4 @@ ios/
 build/
 dist/
 .expo/
+.env
